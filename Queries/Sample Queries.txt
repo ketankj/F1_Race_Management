@@ -1,0 +1,24 @@
+1.)
+
+SELECT
+    t.Team_Name,
+    t.Principal_P_First_Name,
+    t.Principal_P_Last_Name,
+    t.Team_Score
+FROM
+    Team t
+    JOIN Season s ON t.Year = s.Year
+WHERE
+    s.Year = 2020
+ORDER BY
+    t.Team_Score DESC;
+
+2.)
+
+SELECT Driver.First_Name, Driver.Last_Name, Driver.Nationality, Result.Position
+FROM Driver
+JOIN Result ON Driver.DriverID = Result.Driver_ID
+WHERE Result.Driver_ID = '44'
+AND DRIVER.year =2020 ;
+
+3.)

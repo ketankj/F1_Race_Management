@@ -1,0 +1,80 @@
+
+CREATE TABLE Race (
+    Race_Name VARCHAR(255) PRIMARY KEY,
+    Date DATE,
+    Circuit_Name VARCHAR(255),
+    Year INT,
+    FOREIGN KEY (Year) REFERENCES Season (Year),
+    FOREIGN KEY (Circuit_Name) REFERENCES Circuit (Circuit_Name)
+);
+
+CREATE TABLE Location (
+    LocationID INT PRIMARY KEY,
+    Country VARCHAR(255),
+    State VARCHAR(255)
+);
+
+CREATE TABLE Driver (
+    DriverID INT PRIMARY KEY,
+    First_Name VARCHAR(255),
+    Last_Name VARCHAR(255),
+    Nationality VARCHAR(255),
+    Total_Ind_Score INT,
+    Year INT,
+    Team_Name VARCHAR(255),
+    FOREIGN KEY (Year) REFERENCES Season (Year),
+    FOREIGN KEY (Team_Name) REFERENCES Team (Team_Name)
+);
+
+CREATE TABLE Team (
+    Team_Name VARCHAR(255) PRIMARY KEY,
+    Principal_P_First_Name VARCHAR(255),
+    Principal_P_Last_Name VARCHAR(255),
+    Team_Score INT,
+    Year INT,
+    FOREIGN KEY (Year) REFERENCES Season (Year)
+);
+
+CREATE TABLE Result (
+    Result_ID VARCHAR(255),
+    Position INT,
+    Points INT,
+    Driver_ID INT,
+    Team_Name VARCHAR(255),
+    Year INT,
+    PRIMARY KEY (Result_ID,Position)
+    FOREIGN KEY (Year) REFRENCES Season (Year),
+    FOREIGN KEY (Driver_ID) REFERENCES Driver (DriverID),
+    FOREIGN KEY (Team_Name) REFERENCES Team (Team_Name)
+);
+
+CREATE TABLE Season (
+    Year INT PRIMARY KEY,
+    Team_Winner VARCHAR(255),
+    Individual_Winner VARCHAR(255)
+);
+
+CREATE TABLE Season (
+    Year INT PRIMARY KEY,
+    Team_Winner VARCHAR(255),
+    Individual_Winner VARCHAR(255)
+);
+
+
+CREATE TABLE ParticipateIn (
+    DriverID INT,
+    Race_Name VARCHAR(255),
+    Country VARCHAR(255),
+    State VARCHAR(255),
+	Date DATE,
+    Circuit_Name VARCHAR(255),
+    Nationality VARCHAR(255),
+    Last_Name VARCHAR(255),
+    First_Name VARCHAR(255),
+    Total_ind_Score INT,
+    PRIMARY KEY (DriverID, Race_Name),
+    FOREIGN KEY (Race_Name, Year) REFERENCES Race (Race_Name, Year),
+    FOREIGN KEY (DriverID) REFERENCES Driver (DriverID),
+    FOREIGN KEY (Country, State) REFERENCES location (Country, State),
+    FOREIGN KEY (Circuit_Name) REFERENCES circuit (Circuit_Name, Circuit_Length)
+);
